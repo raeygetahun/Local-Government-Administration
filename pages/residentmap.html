@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Raccoon City</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link
+            rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+            integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>    
+    </head>
+
+    <body>
+        <header id="nav">
+            <div>
+              <a href="index.html">
+              <img width="150" height="100" src="logo.jpg">
+                </a>
+            </div>
+            <div class="home">
+                <a href="loggedinresident.html">Home</a>
+            </div>
+            <!-- 
+            <div class="home">
+                <a href="maintenance.html">maintenance</a>
+            </div>
+            <div class="home">
+                <a href="query.html">Query</a>
+            </div>
+            -->
+
+            <div class="about">
+                About        
+            </div>
+            <div>
+              Services
+            </div> 
+
+            
+        </header>
+        <div id="map" style="height:400px;">
+            
+          </div> 
+        
+
+        <!-- <div class="container">
+            <img src="loggo.jpg" alt="city image" style="width: 100%" >
+            <div class="centered">Welcome to Goytom City</div>
+        </div> -->
+
+        <!-- <div class="intro">
+            Welcome to GOYTOM city administration website, 
+            here we provide various document services for our residents. 
+            You can do everything here with just a few clicks.
+        </div> -->
+
+        <footer id="footer">
+            <div class="inner-div" id="address">              
+                Contact US
+                <p>Phone Number: +4920203</p>
+                <p>Location: 123 Hello</p>
+                <p>FAX:  12002</p>
+
+
+            </div>
+
+            <div class="inner-div" id="copy-right"><span>&copy;</span>Copyright 2022</div>
+            <div class="inner-div"> <a href="disclaimer.html">Disclaimer</a></div>
+            <div class="inner-div" id="social-media">
+                <a href="#"><i class="fab icons fa-2x fa-facebook"></i></a>
+                <a href="#"><i class="fab icons fa-2x fa-instagram"></i></a>
+                <a href="#"><i class="fab icons fa-2x fa-twitch"></i></a>
+                <a href="#"><i class="fab icons fa-2x fa-twitter"></i></a>
+            </div>
+            
+        </footer>
+        <script>
+            async function main(){
+                try{
+                    let ipinfo= await fetch('https://ipinfo.io/json?token=87929a3ddcf75d');
+                    let json= await ipinfo.json();
+                    const lat = json.loc.split(',')[0];
+                    const lon=json.loc.split(',')[1];
+                    const ip = json.ip;
+        
+                    var map = L.map('map').setView([lat,lon], 13);
+        
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+        
+                    L.marker([lat,lon]).addTo(map)
+                        .bindPopup('Your external ip address is ' + ip)
+                        .openPopup();
+                }
+                catch(E){
+                    alert("Please turn off your'ad blocker and reload the page");
+                    console.log(E);
+                }
+            }
+            main();
+    
+            
+        
+        </script>
+    </body>
+</html>
